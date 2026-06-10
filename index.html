@@ -1,0 +1,420 @@
+Aqui está o código completo unificado em um único arquivo `index.html`.
+
+Tudo o que você precisa fazer é criar um único arquivo chamado **`index.html`**, colar o código abaixo dentro dele e salvar. Quando você abrir esse arquivo no seu navegador (Chrome, Edge, Safari, etc.), o site completo com a capa chamativa, as imagens e o jogo/quiz já estará funcionando perfeitamente!
+
+```html
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agro Forte, Futuro Sustentável</title>
+    <style>
+        /* --- ESTILOS CSS --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f4f9f4;
+            color: #2c3e50;
+            scroll-behavior: smooth;
+        }
+
+        /* Capa Impactante (Hero Banner) */
+        .hero-banner {
+            background-image: url('https://images.unsplash.com/photo-1500937386664-56d1dfef3854?w=1200');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .hero-overlay {
+            background: rgba(0, 0, 0, 0.65);
+            padding: 40px;
+            border-radius: 15px;
+            max-width: 800px;
+            color: #ffffff;
+            border: 2px solid #4caf50;
+            margin: 0 20px;
+        }
+
+        .hero-overlay h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #4caf50;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+        }
+
+        .hero-overlay p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+
+        .btn-principal {
+            background-color: #ff9800;
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            transition: 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 152, 0, 0.4);
+            display: inline-block;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-principal:hover {
+            background-color: #e65100;
+            transform: scale(1.05);
+        }
+
+        /* Conteúdo Geral */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            color: #2e7d32;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        /* Grid de Imagens */
+        .grid-imagens {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .card-imagem {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            transition: 0.3s;
+        }
+
+        .card-imagem:hover {
+            transform: translateY(-10px);
+        }
+
+        .card-imagem img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+        }
+
+        .card-imagem h3 {
+            padding: 15px 15px 5px 15px;
+            color: #2e7d32;
+        }
+
+        .card-imagem p {
+            padding: 0 15px 20px 15px;
+            color: #555;
+            font-size: 0.95rem;
+            line-height: 1.4;
+        }
+
+        hr {
+            border: 0;
+            height: 2px;
+            background: linear-gradient(to right, transparent, #4caf50, transparent);
+            margin: 60px 0;
+        }
+
+        /* Seção do Quiz */
+        .quiz-section {
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            border-left: 10px solid #2e7d32;
+        }
+
+        .quiz-section p {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+
+        #alternativas-box {
+            margin-top: 25px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .btn-opcao {
+            background-color: #f9f9f9;
+            border: 2px solid #e0e0e0;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: left;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: 0.2s;
+            color: #333;
+        }
+
+        .btn-opcao:hover {
+            background-color: #e8f5e9;
+            border-color: #4caf50;
+        }
+
+        .correta {
+            background-color: #a5d6a7 !important;
+            border-color: #2e7d32 !important;
+            color: #1b5e20 !important;
+            font-weight: bold;
+        }
+
+        .errada {
+            background-color: #ef9a9a !important;
+            border-color: #c62828 !important;
+            color: #b71c1c !important;
+        }
+
+        .btn-proximo {
+            margin-top: 25px;
+            background-color: #2e7d32;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1rem;
+            transition: 0.2s;
+        }
+
+        .btn-proximo:hover {
+            background-color: #1b5e20;
+        }
+
+        .oculto {
+            display: none;
+        }
+
+        #resultado-box {
+            text-align: center;
+            padding: 20px;
+        }
+
+        #resultado-box h3 {
+            font-size: 2rem;
+            color: #2e7d32;
+            margin-bottom: 15px;
+        }
+
+        #placar-texto {
+            font-size: 1.3rem;
+            margin-bottom: 25px;
+            font-weight: bold;
+        }
+
+        footer {
+            background-color: #1b5e20;
+            color: white;
+            text-align: center;
+            padding: 25px;
+            margin-top: 60px;
+            font-size: 0.95rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="hero-banner">
+        <div class="hero-overlay">
+            <h1>Agro Forte, Futuro Sustentável</h1>
+            <p>Descubra como a tecnologia de ponta está transformando o campo, aumentando a produção de alimentos e protegendo a nossa biodiversidade de forma inteligente.</p>
+            <a href="#conteudo" class="btn-principal">Começar Jornada</a>
+        </div>
+    </header>
+
+    <main id="conteudo" class="container">
+        <section class="intro-tech">
+            <h2>Tecnologia a Favor da Natureza</h2>
+            <p style="text-align: center; max-width: 800px; margin: 0 auto 30px auto; font-size: 1.1rem; line-height: 1.6;">
+                A modernização do agronegócio traz soluções inovadoras que reduzem os impactos ambientais e garantem a eficiência dos recursos naturais.
+            </p>
+            
+            <div class="grid-imagens">
+                <div class="card-imagem">
+                    <img src="https://images.unsplash.com/photo-1563514227147-6d2ff665a6a0?w=500" alt="Drones agrícolas">
+                    <h3>Drones e Monitoramento</h3>
+                    <p>Mapeamento de precisão por sensores que identifica pragas e evita o desperdício de defensivos agrícolas e água.</p>
+                </div>
+                <div class="card-imagem">
+                    <img src="https://images.unsplash.com/photo-1516253593875-bd7ba052fbc5?w=500" alt="Energia solar na fazenda">
+                    <h3>Energia Limpa</h3>
+                    <p>Adoção de painéis solares e sistemas de biomassa para gerar eletricidade limpa que move as operações rurais.</p>
+                </div>
+                <div class="card-imagem">
+                    <img src="https://images.unsplash.com/photo-1593113598332-cd288d649433?w=500" alt="Hidroponia vertical">
+                    <h3>Cultivo Inteligente</h3>
+                    <p>Estufas automatizadas e hidroponia vertical que economizam até 90% de água comparado ao plantio tradicional.</p>
+                </div>
+            </div>
+        </section>
+
+        <hr>
+
+        <section class="quiz-section">
+            <h2>Desafio AgroSustentável</h2>
+            <p>Teste seus conhecimentos e veja se você sabe tudo sobre tecnologia verde no campo!</p>
+            
+            <div id="quiz-container">
+                <div id="pergunta-box">
+                    <h3 id="pergunta-texto" style="font-size: 1.3rem; color: #333;">Carregando pergunta...</h3>
+                    <div id="alternativas-box">
+                        </div>
+                </div>
+                
+                <button id="btn-proximo" class="btn-proximo oculto">Próxima Pergunta</button>
+                
+                <div id="resultado-box" class="oculto">
+                    <h3>Parabéns por concluir!</h3>
+                    <p id="placar-texto"></p>
+                    <button onclick="reiniciarQuiz()" class="btn-principal">Jogar Novamente</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 - Agro Forte, Futuro Sustentável. Tecnologia e Preservação Lado a Lado.</p>
+    </footer>
+
+    <script>
+        const perguntas = [
+            {
+                pergunta: "Como os drones ajudam na sustentabilidade do agronegócio?",
+                alternativas: [
+                    "Espantando pássaros nocivos às plantações de grãos.",
+                    "Mapeando a saúde das plantas e permitindo aplicar insumos apenas onde é necessário.",
+                    "Substituindo tratores pesados no transporte de toneladas de colheita."
+                ],
+                correta: 1
+            },
+            {
+                pergunta: "O que caracteriza a chamada 'Agricultura de Precisão'?",
+                alternativas: [
+                    "O uso de tecnologias de dados, GPS e sensores para gerenciar o campo de forma exata.",
+                    "Plantar o máximo de sementes possível em qualquer espaço livre da fazenda.",
+                    "O uso exclusivo de trabalho manual sem o auxílio de nenhuma máquina elétrica."
+                ],
+                correta: 0
+            },
+            {
+                pergunta: "Qual é o principal benefício do uso de energia solar nas fazendas?",
+                alternativas: [
+                    "Acelerar artificialmente o crescimento das plantas durante a noite.",
+                    "Modificar o clima da região para evitar chuvas excessivas.",
+                    "Reduzir a pegada de carbono, gerando energia limpa para sistemas de irrigação e cercas."
+                ],
+                correta: 2
+            }
+        ];
+
+        let indiceAtual = 0;
+        let placar = 0;
+
+        const perguntaTexto = document.getElementById("pergunta-texto");
+        const alternativasBox = document.getElementById("alternativas-box");
+        const btnProximo = document.getElementById("btn-proximo");
+        const resultadoBox = document.getElementById("resultado-box");
+        const perguntaBox = document.getElementById("pergunta-box");
+        const placarTexto = document.getElementById("placar-texto");
+
+        function iniciarQuiz() {
+            indiceAtual = 0;
+            placar = 0;
+            resultadoBox.classList.add("oculto");
+            perguntaBox.classList.remove("oculto");
+            mostrarPergunta();
+        }
+
+        function mostrarPergunta() {
+            redefinirEstado();
+            let q = perguntas[indiceAtual];
+            perguntaTexto.innerText = `${indiceAtual + 1}. ${q.pergunta}`;
+
+            q.alternativas.forEach((opcao, index) => {
+                const botao = document.createElement("button");
+                botao.innerText = opcao;
+                botao.classList.add("btn-opcao");
+                botao.addEventListener("click", () => selecionarAlternativa(botao, index, q.correta));
+                alternativasBox.appendChild(botao);
+            });
+        }
+
+        function redefinirEstado() {
+            btnProximo.classList.add("oculto");
+            while (alternativasBox.firstChild) {
+                alternativasBox.removeChild(alternativasBox.firstChild);
+            }
+        }
+
+        function selecionarAlternativa(botaoSelecionado, indexEscolhido, indexCorreto) {
+            const botoes = alternativasBox.querySelectorAll(".btn-opcao");
+            
+            botoes.forEach(b => b.disabled = true);
+
+            if (indexEscolhido === indexCorreto) {
+                botaoSelecionado.classList.add("correta");
+                placar++;
+            } else {
+                botaoSelecionado.classList.add("errada");
+                botoes[indexCorreto].classList.add("correta");
+            }
+
+            btnProximo.classList.remove("oculto");
+        }
+
+        btnProximo.addEventListener("click", () => {
+            indiceAtual++;
+            if (indiceAtual < perguntas.length) {
+                mostrarPergunta();
+            } else {
+                exibirResultado();
+            }
+        });
+
+        function exibirResultado() {
+            perguntaBox.classList.add("oculto");
+            btnProximo.classList.add("oculto");
+            resultadoBox.classList.remove("oculto");
+            placarTexto.innerText = `Você acertou ${placar} de ${perguntas.length} perguntas!`;
+        }
+
+        function reiniciarQuiz() {
+            iniciarQuiz();
+        }
+
+        // Executa o quiz ao carregar a página
+        iniciarQuiz();
+    </script>
+</body>
+</html>
+
+```
